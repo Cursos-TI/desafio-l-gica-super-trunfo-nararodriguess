@@ -21,25 +21,94 @@ typedef struct {
     float pibPerCapita;
 } Cidade;
 
+// Remove o \n do final de uma linha inserida no prompt
+void lerLinha(char *buffer, int tamanho) {
+    fgets(buffer, tamanho, stdin);
+    int i = 0;
+    while (buffer[i] != '\n' && buffer[i] != '\0') i++;
+    buffer[i] = '\0';
+}
 
+// Lê os atributos de uma cidade
+void lerCidade(Cidade *c) {
+    char buffer[100];
 
-    // Comparação de Cartas:
-    // Desenvolva a lógica de comparação entre duas cartas.
-    // Utilize estruturas de decisão como if, if-else para comparar atributos como população, área, PIB, etc.
+    printf("Estado: ");
+    lerLinha(c->estado, sizeof(c->estado));
 
-    // Exemplo:
-    // if (populacaoA > populacaoB) {
-    //     printf("Cidade 1 tem maior população.\n");
-    // } else {
-    //     printf("Cidade 2 tem maior população.\n");
-    // }
+    printf("Num. da Carta: ");
+    lerLinha(c->codCarta, sizeof(c->codCarta));
 
-    // Exibição dos Resultados:
-    // Após realizar as comparações, exiba os resultados para o usuário.
-    // Certifique-se de que o sistema mostre claramente qual carta venceu e com base em qual atributo.
+    printf("Nome da cidade: ");
+    lerLinha(c->nomeCidade, sizeof(c->nomeCidade));
 
-    // Exemplo:
-    // printf("A cidade vencedora é: %s\n", cidadeVencedora);
+    printf("Populacao: ");
+    lerLinha(buffer, sizeof(buffer)); // salva em uma variável provisória para converter
+    c->populacao = atoi(buffer);   // converte string para int
+
+    printf("Area: ");
+    lerLinha(buffer, sizeof(buffer));
+    c->area = atof(buffer);        // converte string para float
+
+    printf("PIB: ");
+    lerLinha(buffer, sizeof(buffer));
+    c->pib = atof(buffer);
+
+    printf("Qtd de pontos turisticos: ");
+    lerLinha(buffer, sizeof(buffer));
+    c->nPontosTuristicos = atoi(buffer);
+
+    if (c->area > 0 || c->populacao > 0) {
+        c->densidadePopulacional =  (float)c->populacao / c->area;
+        c->pibPerCapita =  (float)c->pib / c->populacao;
+    } else {
+        c->densidadePopulacional = 0;
+        c->pibPerCapita = 0;
+    }
+}
+
+void compararCidades(Cidade c1, Cidade c2) {
+    char *atributos[] = {
+        "Populacao", "Area", "PIB",
+        "Pontos Turisticos", "Densidade Populacional", "PIB per Capita"
+    };
+
+    float valoresC1[] = {
+        c1.populacao, c1.area, c1.pib,
+        c1.nPontosTuristicos, c1.densidadePopulacional, c1.pibPerCapita
+    };
+
+    float valoresC2[] = {
+        c2.populacao, c2.area, c2.pib,
+        c2.nPontosTuristicos, c2.densidadePopulacional, c2.pibPerCapita
+    };
+
+    srand(time(NULL));
+    int sorteado = rand() % 6;
+
+    printf("\n=== Atributo sorteado: %s ===\n", atributos[sorteado]);
+    printf("%s: %.2f\n", c1.nomeCidade, valoresC1[sorteado]);
+    printf("%s: %.2f\n", c2.nomeCidade, valoresC2[sorteado]);
+
+    if (valoresC1[sorteado] > valoresC2[sorteado]) {
+        printf("Vencedor: %s!\n", c1.nomeCidade);
+    } else if (valoresC2[sorteado] > valoresC1[sorteado]) {
+        printf("Vencedor: %s!\n", c2.nomeCidade);
+    } else {
+        printf("Empate!\n");
+    }
+}
+
+int main() {
+    Cidade cidade1, cidade2;
+
+    printf("=== Cidade 1 ===\n");
+    lerCidade(&cidade1);
+
+    printf("\n=== Cidade 2 ===\n");
+    lerCidade(&cidade2);
+
+    compararCidades(cidade1, cidade2);
 
     return 0;
 }
