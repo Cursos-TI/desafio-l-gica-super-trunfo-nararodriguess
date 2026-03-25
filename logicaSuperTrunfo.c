@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 // Desafio Super Trunfo - Países
 // Tema 2 - Comparação das Cartas
@@ -6,20 +8,20 @@
 // Siga os comentários para implementar cada parte do desafio.
 
 int main() {
-    // Definição das variáveis para armazenar as propriedades das cidades
-    // Você pode utilizar o código do primeiro desafio
 
-    
-    // Cadastro das Cartas:
-    // Implemente a lógica para solicitar ao usuário que insira os dados das cidades
-    // utilizando a função scanf para capturar as entradas.
-    // utilize o código do primeiro desafio
+typedef struct {
+    char estado[10];        
+    char codCarta[10];
+    char nomeCidade[50];
+    int populacao;
+    float area;
+    float pib;
+    int nPontosTuristicos;
+    float densidadePopulacional;
+    float pibPerCapita;
+} Cidade;
 
-    // Exemplo:
-    // printf("Digite o código da cidade: ");
-    // scanf("%s", codigo);
-    // 
-    // (Repita para cada propriedade)
+
 
     // Comparação de Cartas:
     // Desenvolva a lógica de comparação entre duas cartas.
