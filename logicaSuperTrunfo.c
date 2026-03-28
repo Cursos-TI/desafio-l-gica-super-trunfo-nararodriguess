@@ -7,8 +7,6 @@
 // Este código inicial serve como base para o desenvolvimento do sistema de comparação de cartas de cidades. 
 // Siga os comentários para implementar cada parte do desafio.
 
-int main() {
-
 typedef struct {
     char estado[10];        
     char codCarta[10];
@@ -103,37 +101,39 @@ int main() {
     int opcao;
     Cidade cidade1, cidade2;
 
-    printf("Menu Principal\n");
-    printf("1. Iniciar Jogo\n");
-    printf("2. Ver Regras\n");
-    printf("3. Sair\n");
-    printf("Escolha uma opção: \n");
-    scanf("%d", &opcao);
+    do {
+        printf("Menu Principal\n");
+        printf("1. Iniciar Jogo\n");
+        printf("2. Ver Regras\n");
+        printf("3. Sair\n");
+        printf("Escolha uma opção: \n");
+        scanf("%d", &opcao);
 
-    switch (opcao) {
-    case 1:
-        printf("Iniciando o jogo...\n");
+        switch (opcao) {
+        case 1:
+            printf("Iniciando o jogo...\n");
 
-        printf("=== Cidade 1 ===\n");
-        lerCidade(&cidade1);
+            printf("=== Cidade 1 ===\n");
+            lerCidade(&cidade1);
 
-        printf("\n=== Cidade 2 ===\n");
-        lerCidade(&cidade2);
+            printf("\n=== Cidade 2 ===\n");
+            lerCidade(&cidade2);
 
-        compararCidades(cidade1, cidade2);
-        break;
-    case 2:
-        printf("Regras do Jogo:\n");
-        printf("1. O jogo é em dupla\n");
-        printf("2. Só é permitido inserir dados de duas cidades\n");
-        printf("3. Inserir dados errados encerra o jogo\n");
-        break;
-    case 3:
-        printf("Saindo...\n");
-        break;
-    default:
-        printf("Opção inválida. Tente novamente.\n");
-    }
+            compararCidades(cidade1, cidade2);
+            break;
+        case 2:
+            printf("Regras do Jogo:\n");
+            printf("1. O jogo é em dupla\n");
+            printf("2. Só é permitido inserir dados de duas cidades\n");
+            printf("3. Inserir dados errados encerra o jogo\n");
+            break;
+        case 3:
+            printf("Saindo...\n");
+            break;
+        default:
+            printf("Opção inválida. Tente novamente.\n");
+        }
+    } while (opcao != 3);
 
     return 0;
 }
